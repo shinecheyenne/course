@@ -33,10 +33,10 @@ last_modified_at: '2021-10-12'
 ## 자바 설치
 자바 프로그램을 개발하고 실행하기 위한 환경은 JDK/JRE에서 제공하며, IDE 환경을 제공하는 도구에는 이클립스, 인텔리J 등이 있다.
 * JDK 설치 후 시스템 환경변수편집
-<img src="/images/Inkedsetting.jpg"  width="600" height="400"/>
-<img src="/images/Inkedpath.jpg"  width="600" height="400"/>
+<img src="images/Inkedsetting.jpg"  width="600" height="400"/>
+<img src="images/Inkedpath.jpg"  width="600" height="400"/>
 * cmd 창에서 javac(자바 컴파일러) 확인
-<img src="/images/Inkedjavac.jpg"  width="600" height="400"/>
+<img src="images/Inkedjavac.jpg"  width="600" height="400"/>
 
 ## 소스와 클래스 파일
 클래스 파일(.class)에는 반드시 하나의 자바 클래스만 들어 있다. 하나의 자바 소스 파일에 작성된 클래스 중 오직 한 클래스만 public으로 선언할 수 있다. 소스 파일 내에 public으로 선언된 클래스의 이름으로 자바 소스 파일을 저장해야 한다.
