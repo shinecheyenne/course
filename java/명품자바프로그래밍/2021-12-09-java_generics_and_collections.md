@@ -25,7 +25,7 @@ last_modified_at: '2021-12-09'
 
 객체들의 컨테이너. 배열과 달리 가변 크기로서 객체를 쉽게 삽입, 삭제, 검색할 수 있다.
 
-<img src="images/collections_interface_class.png"  width="600" height="400"/>
+<img src="images/collections_interface_class.PNG"  width="600" height="400"/>
 
 - 컬렉션은 제네릭(generics) 기법으로 만들어져 있다. 컬렉션 클래스의 이름에는 타입 매개변수(\<E\>, \<K\>, \<V\> 등)가 포함되며, 타입 매개변수 대신 Integer 등의 구체적인 타입을 지정하면 지정된 타입만 다룰 수 있는 구체화된 클래스가 된다.
 - 컬렉션은 여러 타입의 값을 다룰 수 있도록 한 자료 구조이지만, 사용할 때는 지정된 특정 타입의 값만 저장 가능하다. 
