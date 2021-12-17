@@ -17,24 +17,46 @@
 # -> 두 집단의 평균이 다르다.
 ```
 
+
+```python
+def showfuncs(**dic):
+    for i,(k, v) in enumerate(sorted(dic.items(), key = (lambda x:x[0]), reverse=False), 1):
+        print("\n%d. %s : %s"% (i, k, v))
+```
+
+extension 설치
+pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install
+
 # # Numpy
 
-random.seed() : 랜덤 추출 시드 고정
-
-random.rand() : 넘파이 배열 타입 난수 생성
-
-arange() : 넘파이 배열 생성
-
-reshpae() :행, 열 지정
-
-shape : 넘파이 배열 정보 (행, 열) 확인
-
-zeros() : 0으로 채워진 넘파이 배열 생성
+#### <numpy documentation\>: https://numpy.org/doc/stable/
 
 
+```python
+numpyfuncs = {"random.seed()": "랜덤 추출 시드 고정", "random.rand()":"넘파이 배열 타입 난수 생성", "arange()":"넘파이 배열 생성",
+        "reshape()":"행, 열 지정", "shape":"넘파이 배열 정보 (행, 열) 확인", "zeros()":"0으로 채워진 넘파이 배열 생성"}
 
+showfuncs(**numpyfuncs)
+
+```
+
+    
+    1. arange() : 넘파이 배열 생성
+    
+    2. random.rand() : 넘파이 배열 타입 난수 생성
+    
+    3. random.seed() : 랜덤 추출 시드 고정
+    
+    4. reshape() : 행, 열 지정
+    
+    5. shape : 넘파이 배열 정보 (행, 열) 확인
+    
+    6. zeros() : 0으로 채워진 넘파이 배열 생성
+    
 
 # # Pandas
+
+#### <Pandas documentation\>: https://pandas.pydata.org/docs/
 
 ### (1) 데이터 프레임 기본 정보 출력
 
@@ -59,43 +81,55 @@ read_csv(file_path) : 데이터를 데이터 프레임 형태로 불러옴
 
 ### (3) 탐색
 
-unique() : 데이터 범주 반환
-
-value_counts() : series 객체의 모든 데이터의 범주를 개수와 함께 반환
-
-groupby() : 특정 피처 기준으로 그룹 생성
-
-sum(), count() : 총량, 개수
-
-tolist() : 값을 리스트화
-
-apply() : 시리즈 단위의 연산을 처리
- 
-
 
 ```python
-# apply() 사용 예
-df['column_name'].apply(lambda x: float(x[1:]))
+pandasfuncs = {"unique()" : "데이터 범주 반환", "value_counts()" : "series 객체의 모든 데이터의 범주를 개수와 함께 반환",
+               "groupby()" : "특정 피처 기준으로 그룹 생성", "tolist()" : "값을 리스트화", 
+               "apply()" : "시리즈 단위의 연산을 처리 ex) df['column_name'].apply(lambda x: float(x[1:]))",
+               "to_numpy()" : "시리즈 객체를 넘파이 배열로 변환", "sort_values(by=\"\", ascending=False)": "series 데이터를 정렬",
+               "drop_duplicates([a,b])" : "b내 중복 집계된 a 아이템을 제거", "astype()" : "데이터 형 변환",
+               "loc() / iloc()" : "특정 행 지정하여 출력", "corr(method='pearson')" : "피어슨 상관계수 구하기",
+               "isna()" : "결측데이터값을 True로 반환", "fillna()" : "결측데이터 값(NAN) 지정하기",
+               "agg()" : "여러 연산 결과를 동시에 얻을 수 있음 ex) .agg(['mean','min','sum'])"}
+
+showfuncs(**pandasfuncs)
 ```
 
-sort_values(by="", ascending=False): series 데이터를 정렬
-
-drop_duplicates([a,b]) : b내 중복 집계된 a 아이템을 제거
-
-astype() : 데이터 형 변환
-
-loc() / iloc() : 특정 행 지정하여 출력
-
-corr(method='pearson') : 피어슨 상관계수 구하기
-
-isna() : 결측데이터값을 True로 반환
-
-fillna() : 결측데이터 값(NAN) 지정하기
-
-agg() : 여러 연산 결과를 동시에 얻을 수 있음 ex) .agg(['mean','min','sum'])
-
+    
+    1. agg() : 여러 연산 결과를 동시에 얻을 수 있음 ex) .agg(['mean','min','sum'])
+    
+    2. apply() : 시리즈 단위의 연산을 처리 ex) df['column_name'].apply(lambda x: float(x[1:]))
+    
+    3. astype() : 데이터 형 변환
+    
+    4. corr(method='pearson') : 피어슨 상관계수 구하기
+    
+    5. drop_duplicates([a,b]) : b내 중복 집계된 a 아이템을 제거
+    
+    6. fillna() : 결측데이터 값(NAN) 지정하기
+    
+    7. groupby() : 특정 피처 기준으로 그룹 생성
+    
+    8. isna() : 결측데이터값을 True로 반환
+    
+    9. loc() / iloc() : 특정 행 지정하여 출력
+    
+    10. sort_values(by="", ascending=False) : series 데이터를 정렬
+    
+    11. to_numpy() : 시리즈 객체를 넘파이 배열로 변환
+    
+    12. tolist() : 값을 리스트화
+    
+    13. unique() : 데이터 범주 반환
+    
+    14. value_counts() : series 객체의 모든 데이터의 범주를 개수와 함께 반환
+    
 
 # # Matplotlib
+
+#### <Matplotlib documentation\>: https://matplotlib.org/stable/tutorials/index.html
+
+#### <colormaps\>: https://matplotlib.org/stable/tutorials/colors/colormaps.html
 
 bar()
 
@@ -109,15 +143,14 @@ pie()
 
 # # Seaborn
 
+#### <seaborn\>: https://seaborn.pydata.org/index.html
+
 heatmap() : 히트맵
 
 pairplot() : 산점도 그래프
 
 # # Scipy
 
+#### <scipy\>: https://scipy.github.io/devdocs/index.html
+
 ttest_ind() : 두 집단의 시리즈 데이터를 넣어 t-test 검정 통계량과 p-value(유의확률) 반환 --> equal_var=True (두 집단의 분산이 같은 경우)
-
-
-```python
-
-```
