@@ -497,10 +497,9 @@ labels = drinks['continent'].value_counts().index.tolist()
 fracs1 = drinks['continent'].value_counts().values.tolist()
 explode=(0.05,0.05,0.05,0.25,0.05,0.05)
 #colors = ['#c4f8fe', '#ffadad', '#cafec4', '#fef4c4', '#d5c4fe', '#f7fec4']
-
 cmap = plt.get_cmap('Accent')
 colors = [cmap(i) for i in np.linspace(0, 1, 7)]
-plt.pie(fracs1, explode= explode, labels = labels, autopct = "%.0f%%", shadow= False, colors=colors)
+plt.pie(fracs1, explode= explode, labels = labels, autopct = "%.0f%%", shadow= False, colors=colors, radius=1) #wedgeprops=["linewidth":2, "edgecolor":"black"]
 
 #donut
 centre_circle = plt.Circle((0,0),0.4, color='black', fc='white',linewidth=0)
@@ -666,14 +665,6 @@ plt.show()
 ```
 
 
-```python
-
-```
-
-
-```python
-
-```
 
 인사이트 도출1: 대륙별 평균 wine_servings 탐색
 
@@ -757,7 +748,7 @@ plt.title('total_litres_of_pure_alcohol by Continent')
 
 
     
-![png](output_32_1.png)
+![png](output_31_1.png)
     
 
 
@@ -784,12 +775,57 @@ print("The t-statistic and p-value assuming equal variance is %.3f and %.3f."%tT
 print("The t-statistic and p-value assuming equal variance is %.3f and %.3f."%tTestResultDiffVar)
 ```
 
-    Ttest_indResult(statistic=-7.267986335644365, pvalue=9.719556422442453e-11)
     The t-statistic and p-value assuming equal variance is -7.268 and 0.000.
     The t-statistic and p-value assuming equal variance is -7.144 and 0.000.
     
 
 
 ```python
+# 대한민국은 얼마나 술을 마시나?
+drinks['total_servings']=drinks['beer_servings']+drinks['wine_servings']+drinks['spirit_servings']
+# 열 삭제
+# drinks = drinks.drop(['total_servings'], axis=1)
+drinks['alcohol_rate'] = drinks['total_litres_of_pure_alcohol']/drinks['total_servings']
+drinks['alcohol_rate']=drinks['alcohol_rate'].fillna(0)
+country_with_rank = drinks.sort_values(by=['alcohol_rate'], ascending=False)
+```
+
+
+```python
+# 국가별 순위 정보 시각화
+country_list = country_with_rank.country.tolist()
+x_pos = np.arange(len(country_list))
+rank = country_with_rank.alcohol_rate.tolist()
+
+bar_list = plt.bar(x_pos, rank)
+bar_list[country_list.index("South Korea")].set_color('r')
+plt.ylabel('alcohol rate')
+plt.title('liquor drink rank by country')
+plt.axis([0,200,0,0.3])
+
+korea_rank = country_list.index("South Korea")
+korea_alcohol_rate = country_with_rank[country_with_rank['country']=='South Korea']['alcohol_rate'].values[0]
+plt.annotate('South Korea: '+str(korea_rank+1),
+            xy = (korea_rank, korea_alcohol_rate),
+            xytext = (korea_rank+30, korea_alcohol_rate+0.05),
+            arrowprops = dict(facecolor='red', shrink=0.05))
+```
+
+
+
+
+    Text(44, 0.1093939393939394, 'South Korea: 15')
+
+
+
+
+    
+![png](output_35_1.png)
+    
+
+
+
+```python
 
 ```
+
