@@ -34,6 +34,20 @@
 
 \> create table {table} as (select ....);
 
+\> create unique index {index} on {table} ({column}, ...);
+
+\> alter index {index} rename to {index};
+
+\> alter table {table} add (constraint {primarykey} primary key ({column}, ...);
+
+\> alter table {table} drop constraint {primarykey};
+
+\> alter table {table} modify|add ({column} {datatype});
+
+\> alter table {table} rename column {column} to {column};
+
+\> alter table {table} drop column {column};
+
 \> create sequence {name} start with {%d} increment by {%d}; -> {name}.nextval: 1,2,3,...
 
 \> create sequence {name} start with {%d} increment by {%d} minvalue {%d} maxvalue {%d} cycle nocache;
@@ -66,7 +80,7 @@
 
 <br/>
 
->ORDER BY, GROUP BY, ROULLUP(), GROUPING_ID(), CUBE()
+>ORDER BY, GROUP BY, ROULLUP(), GROUPING_ID(), CUBE(), ROW_NUMBER(), RANK(), DENSE_RANK()
 
 \> select * from {table} order by {column}, {column} desc;
 
@@ -76,6 +90,9 @@
 
 \> select {column} from {table} group by cube({column}, {column});
 
+\> select * from user_ind_columns;
+
+\> select {column}, row_number()|rank() over (partition by {column} order by {column}) from {table} order by {column};
 
 <br/>
 
@@ -153,6 +170,10 @@ cf. select * from {table} sample({percent});
 
 \> delete from {table}; commit; //트랜잭션 로그를 기록하는 작업 때문에 시간이 오래 걸림
 
-\> drop table {table}; //테이블 자체를 삭제
+\> drop table {table} [cascade constraints]; //테이블 자체를 삭제 ([cascade constraints]: 제약사항 무시하고 삭제)
 
-\> truncate table {table}; //트랜잭션 로그를 기록하지 않아 속도가 
+\> truncate table {table}; //트랜잭션 로그를 기록하지 않아 속도가 빠름 (복구 정보 없이 데이터 전체 삭제)
+
+## roleback
+
+\> rollback;
