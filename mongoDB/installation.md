@@ -33,7 +33,7 @@ CMD 관리자 모드 실행
 
 CMD
 
-\> mongo
+\> mongosh
 
 ## 기본
 
@@ -67,7 +67,7 @@ CMD
 
 \> db.{collection}.updateMany({update filter}, {$set:{update action}})
 
-\> db.{collection}.deleteOne()/deleteMany()
+\> db.{collection}.deleteOne()/deleteMany({})
 
 \> db.{collection}.find({}).explain("executionStats") //쿼리 경로에 대한 정보 제공
 
@@ -84,6 +84,32 @@ CMD
 \> db.collection.find({status: "A", $or: [{qty:{$lt: 30}}, {item: /^p/}]})
 
 \> db.collection.find({qty: {$mod:[50,0]}})
+
+\> db.collection.updateOne({ _id: 100 },{ $set: { "details.make": "Kustom Kidz" } })
+
+\> db.members.updateOne({_id: 1},[{$set:{status:"Modified",comments:["$misc1","$misc2"],lastUpdate:"$$NOW"}},{$unset:["misc1","misc2"]}]) # comments: [ "$misc1", "$misc2" ] : misc1, misc2 필드값이 comments 배열의 요소로 삽입 // $unset: misc1, misc2 필드 제거
+
+\> db.products.updateOne({sku:"unknown"},{$unset:{quantity: "", instock: ""}})
+
+\> db.students.updateOne({_id: 1}, {$push:{scores:{$each: [90,92,85]}}}) # $each 수정자: 배열에 다수의 배열요소를 추가
+
+\> db.students.updateOne({ id: 1, {$addToSet: {scores:{$each:[90,37,92]}}}) #$push 대신 $addToSet: 중복값은 추가되지 않음
+
+\> db.student.updateOne({_id:1}, {$push:{scores:{$each:[2,124,49], $sort:-1, $slice:5}}}) #내림차순 정렬, 5개 요소만 저장
+
+\> db.student.updateOne({_id:1}, {$pop:{score: 1}}) # $pop 연산자는 필드의 첫번째/마지막 요소 제거 (1: 마지막/-1: 첫번째)
+
+## 쿼리 연습
+
+https://docs.mongodb.com/manual/tutorial/query-arrays/
+
+https://docs.mongodb.com/manual/tutorial/query-array-of-documents/
+
+\> db.inventory.find({dim_cm:{$elemMatch:{$gt:22, $lt:30}}}) //조건을 동시에 만족하는 도큐먼트 검색
+
+\> db.inventory.find({"tags":{$size:3}})
+
+
 
 ## 참고
 
